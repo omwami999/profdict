@@ -6,6 +6,11 @@ from models.models import Item
 app = FastAPI()
 
 # Pydantic model
+class Item(BaseModel):
+    id: int
+    name: str
+    description: Optional[str] = None
+    price: float
 
 # In-memory "database"
 items_db: List[Item] = []
@@ -31,5 +36,3 @@ def get_item(item_id: int):
             return item
     raise HTTPException(status_code=404, detail="Item not found")
 
-# Update
-@app.put("/items/{item
